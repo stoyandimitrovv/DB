@@ -1,4 +1,4 @@
-# DB
+# DB								Display the source blob
 
 Databases MSSQL Server Exam- Prep - 13 February 2021
 CREATE DATABASE [Bitbucket]
