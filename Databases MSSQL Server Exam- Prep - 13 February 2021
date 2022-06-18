@@ -71,7 +71,7 @@ GO
 
 --Problem 3
 SELECT *
-	FROM [Issues]
+  FROM [Issues]
 
 UPDATE [Issues]
    SET [IssueStatus] = 'closed'
@@ -80,49 +80,49 @@ UPDATE [Issues]
 --Problem 4
 DELETE FROM [RepositoriesContributors]
       WHERE [RepositoryId] = (
-							  SELECT [Id]
-							    FROM [Repositories]
+			       SELECT [Id]
+			       FROM [Repositories]
                                WHERE [Name] = 'Softuni-Teamwork'
-							 ) 
+			      ) 
 
 DELETE FROM [Commits]
       WHERE [IssueId] IN (
-	                       SELECT [Id]
+	                   SELECT [Id]
                              FROM [Issues]
                             WHERE [RepositoryId] = (
                                                      SELECT [Id]
                                                        FROM [Repositories]
                                                       WHERE [Name] = 'Softuni-Teamwork'
-					                                )
+					            )
 	                     )
 
 DELETE FROM [Issues]
-	  WHERE [RepositoryId] = (
-							  SELECT [Id]
-							    FROM [Repositories]
-                               WHERE [Name] = 'Softuni-Teamwork'
-							 )
+      WHERE [RepositoryId] = (
+				 SELECT [Id]
+			           FROM [Repositories]
+                                  WHERE [Name] = 'Softuni-Teamwork'
+				 )
 
 --Problem 5
   SELECT [Id], 
-		 [Message],
-		 [RepositoryId],
-		 [ContributorId]
+	 [Message],
+	 [RepositoryId],
+	 [ContributorId]
     FROM [Commits]
 ORDER BY [Id], [Message], RepositoryId, [ContributorId]
 
 --Problem 6
   SELECT [Id],
-	     [Name],
-		 [Size]
+	 [Name],
+         [Size]
     FROM [Files]
    WHERE [Size] > 1000 AND [Name] LIKE '%html%'
 ORDER BY [Size] DESC, [Id], [Name]
 
 --Problem 7
    SELECT [i].Id,
-		  CONCAT([u].[Username], ' : ', [i].[Title])
-	   AS [IssueAssignee]
+          CONCAT([u].[Username], ' : ', [i].[Title])
+	  AS [IssueAssignee]
      FROM [Issues]
        AS [i]
 LEFT JOIN [Users]
@@ -132,15 +132,15 @@ LEFT JOIN [Users]
 
 --Problem 8
          SELECT [fp].[Id],
-			    [fp].[Name],
-				CONCAT([fp].[Size], 'KB') AS [Size]
+		[fp].[Name],
+		CONCAT([fp].[Size], 'KB') AS [Size]
            FROM [Files]
              AS [fch]
 FULL OUTER JOIN [Files]
              AS [fp]
-        	 ON [fch].[ParentId] = [fp].[Id]
-		  WHERE [fch].[Id] IS NULL
-	   ORDER BY [fp].[Id], [fp].[Name], [fp].[Size] DESC
+             ON [fch].[ParentId] = [fp].[Id]
+	  WHERE [fch].[Id] IS NULL
+       ORDER BY [fp].[Id], [fp].[Name], [fp].[Size] DESC
 
 --Problem 9
 SELECT TOP(5) [r].[Id] ,
@@ -160,9 +160,9 @@ SELECT TOP(5) [r].[Id] ,
 --Problem 10
     SELECT [u].[Username],
            AVG([f].[Size])
-  	    AS [Size]
-  	  FROM [Users]
-  	    AS [u]
+  	   AS [Size]
+      FROM [Users]
+  	   AS [u]
 INNER JOIN [Commits]
 		AS [c]
 		ON [c].[ContributorId] = [u].[Id]
